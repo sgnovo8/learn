@@ -2,18 +2,23 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-// check to see if the callback problem has resolved
-// Import Ownable from the OpenZeppelin Contracts library
-import "@openzeppelin/contracts/access/Ownable.sol";
+// Import Auth from the access-control subdirectory
+import "./access-control/Auth.sol";
 
-// Make Box inherit from the Ownable contract
-contract Box is Ownable {
+contract Box {
     uint256 private _value;
+    Auth private _auth;
 
     event ValueChanged(uint256 value);
 
-    // The onlyOwner modifier restricts who can call the store function
-    function store(uint256 value) public onlyOwner {
+    constructor() {
+        _auth = new Auth(msg.sender);
+    }
+
+    function store(uint256 value) public {
+        // Require that the caller is registered as an administrator in Auth
+        require(_auth.isAdministrator(msg.sender), "Unauthorized");
+
         _value = value;
         emit ValueChanged(value);
     }
