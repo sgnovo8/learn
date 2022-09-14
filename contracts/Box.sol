@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+// comment re library accessibility
 // Import Auth from the access-control subdirectory
 import "@openzeppelin/contracts/access/Ownable.sol";
 
