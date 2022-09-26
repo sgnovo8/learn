@@ -25,7 +25,7 @@ contract Box is Ownable {
 */
 
 // contracts/Box.sol
-// SPDX-License-Identifier: MIT
+
 pragma solidity ^0.8.0;
 
 // Import Auth from the access-control subdirectory
